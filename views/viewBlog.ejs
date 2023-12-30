@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <style>
+            img {
+                width: 50vw;
+                border-radius: 20px;
+            }
+
+            .paragraph {
+                line-height: 40px;
+            }
+
+            #profilePicture {
+                width: 60px;
+            }
+            #commentProfilePicture{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+        </style>
+        <title>Blog</title>
+</head>
+
+<body>
+    <%- include('./partials/navbar') %>
+
+        <div class="container" mt-4>
+            <h1>
+                <%= blog.title %>
+            </h1>
+            <img src="<%= blog.coverImageURL %>" alt="">
+            <p class="paragraph">
+                <%= blog.body %>
+            </p>
+        </div>
+        <div class="container" mt-4>
+            <h4>Created By:</h4>
+            <img id="profilePicture" src="<%= blog.createdBy.profile_picture %>" alt="Reload">
+            <h5>
+                <%= blog.createdBy.fullname%>
+            </h5>
+        </div>
+
+        <% if (locals.user) { %>
+            <h1>Enter your comment:</h1>
+         <div class="container" mt-3>
+            <form action="/blog/comment/<%= blog._id %>" method="post">
+                <textarea name="comment" id="" cols="30" rows="2" placeholder="Enter Your comment"></textarea>
+                <button type="submit" class="btn btn-primary">Comment</button>
+            </form>
+         </div>
+        <% } %>
+
+        <div class="container mt-5">
+            <h1>Comments(<%= comments.length %>)</h1>
+                <% if (comments && comments.length > 0) { %>
+                    <% comments.forEach(comment => { %>
+                        <div class="mt-10">
+                            <img id="commentProfilePicture" src="<%= comment.createdBy.profile_picture %>" alt="Reload">
+                        <h4>Comment from: <%= comment.createdBy.fullname %></h4>
+                        <h6>Comment: <%= comment.comment %></h6>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No comments yet.</p>
+                <% } %>
+        </div>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>

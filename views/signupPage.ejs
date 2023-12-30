@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('./partials/head') %>
+    <style>
+      #container {
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+        margin-top: 40px;
+      }
+
+      #signup_form {
+        border: 1px solid gray;
+        box-shadow: 10px 5px 20px 10px gray;
+        width: 50vw;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .mb-3 {
+        width: 70%;
+      }
+    </style>
+    <title>Sign-Up</title>
+</head>
+
+<body>
+  <%- include('./partials/navbar') %>
+
+    <div id="container">
+      <form id="signup_form" action="/user/signup" method="post" enctype="multipart/form-data">
+        <div id="profileImage" class="mb-3">
+          <label for="profileImage" class="form-label"></label>
+          <input type="file" class="form-control" id="profileImage" name="profileImage">
+        </div>
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="fullName" name="fullName">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="userRole">
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+          </select>
+          <label for="floatingSelect">Works with selects</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <style>
+            #container {
+                display: flex;
+                justify-content: center;
+            }
+
+            form {
+                width: 400px;
+            }
+
+            button {
+                margin-top: 10px;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('./partials/navbar') %>
+
+        <div id="container">
+            <form action="/blog/upload" method="post" enctype="multipart/form-data">
+                <div id="coverImage" class="mb-3">
+                    <label for="coverImage" class="form-label"></label>
+                    <input type="file" class="form-control" id="coverImage" name="coverImage">
+                </div>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Enter the blog title</label>
+                    <input type="text" class="form-control" id="title" name="title">
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="blogBody"
+                        style="height: 100px" name="blogBody"></textarea>
+                    <label for="blogBody">Enter the blog body</label>
+                </div>
+                <button type="submit" class="btn btn-outline-success">Post</button>
+            </form>
+        </div>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>

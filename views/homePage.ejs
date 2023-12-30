@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('./partials/head') %>
+        <style>
+            img {
+                height: 300px;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            img:hover {
+                scale: 1.05;
+            }
+
+            #items {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+
+            .card {
+                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                margin-top: 10px;
+                padding: 20px;
+            }
+
+            #noUserMessage {
+                color: red;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-size: 1.5rem;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            @media only screen and (max-width: 767px) {
+                #items {
+                    display: block;
+                }
+
+                .card {
+                    width: 100vw;
+                }
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('./partials/navbar') %>
+
+        <% if (locals.user) { %>
+            <div id="container">
+                <div id="items">
+                    <% allBlogs.forEach((blog)=> { %>
+                        <div class="card">
+                            <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Image">
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    <%= blog.title %>
+                                </h3>
+                                <a href="/blog/<%=blog._id %>" class="btn btn-primary">View</a>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+            <% } else { %>
+                <div id="noUserMessage">
+                    <p>You are not Sign-in or Sign-Up. Please log in to view content.</p>
+                </div>
+                <% } %>
+
+                    <%- include('./partials/scripts') %>
+</body>
+
+</html>
